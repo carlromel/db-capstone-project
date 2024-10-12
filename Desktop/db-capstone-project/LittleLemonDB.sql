@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `bookings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bookings` (
-  `BookingID` int NOT NULL,
-  `TableNumber` int NOT NULL,
-  `BookingDate` datetime NOT NULL,
-  `CustomerID` int NOT NULL,
+  `BookingID` int NOT NULL AUTO_INCREMENT,
+  `BookingDate` date DEFAULT NULL,
+  `TableNumber` int DEFAULT NULL,
+  `CustomerID` int DEFAULT NULL,
   PRIMARY KEY (`BookingID`),
-  KEY `customer_id_fk_idx` (`CustomerID`),
+  KEY `customer_id_fk` (`CustomerID`),
   CONSTRAINT `customer_id_fk` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,7 @@ CREATE TABLE `bookings` (
 
 LOCK TABLES `bookings` WRITE;
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
+INSERT INTO `bookings` VALUES (1,'2022-10-10',5,1),(2,'2022-11-12',3,2),(3,'2022-10-11',2,3),(4,'2022-10-13',2,1),(5,'2022-12-17',6,1);
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,12 +51,12 @@ DROP TABLE IF EXISTS `customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customers` (
-  `CustomerID` int NOT NULL,
+  `CustomerID` int NOT NULL AUTO_INCREMENT,
   `FullName` varchar(255) NOT NULL,
   `ContactNumber` varchar(45) NOT NULL,
   `Email` varchar(45) NOT NULL,
   PRIMARY KEY (`CustomerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,6 +65,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
+INSERT INTO `customers` VALUES (1,'AA','123','email1'),(2,'BB','456','email2'),(3,'CC','789','email3');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +77,7 @@ DROP TABLE IF EXISTS `menuitems`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `menuitems` (
-  `MenuItemsID` int NOT NULL,
+  `MenuItemsID` int NOT NULL AUTO_INCREMENT,
   `CourseName` varchar(255) NOT NULL,
   `StarterName` varchar(255) NOT NULL,
   `DesertName` varchar(255) NOT NULL,
@@ -100,7 +102,7 @@ DROP TABLE IF EXISTS `menutables`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `menutables` (
-  `MenuTableID` int NOT NULL,
+  `MenuTableID` int NOT NULL AUTO_INCREMENT,
   `MenuItemID` int NOT NULL,
   `MenuName` varchar(255) NOT NULL,
   `Cuisine` varchar(255) NOT NULL,
@@ -127,7 +129,7 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
-  `OrderID` int NOT NULL,
+  `OrderID` int NOT NULL AUTO_INCREMENT,
   `MenuTableID` int NOT NULL,
   `CustomerID` int NOT NULL,
   `TotalCost` decimal(10,0) NOT NULL,
@@ -190,4 +192,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-12 13:21:44
+-- Dump completed on 2024-10-12 17:41:10
